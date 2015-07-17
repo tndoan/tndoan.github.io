@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Changing to blue Dropbox icons"
 date: 2014-12-12
 ---
