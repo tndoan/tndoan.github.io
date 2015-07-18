@@ -1,0 +1,66 @@
+---
+layout: post
+mathjax: true
+title:  "Stochastic Variance Reduced Gradient"
+excerpt: "Some thought of SVRG algorithm"
+date:   2015-07-16 21:30:00
+---
+
+Optimization has a long history but it is still developed by many researchers around the world. With the raise of machine learning and large dataset nowaday, optimization is now evoluating as the heart of parameter learning process. Researchers are trying to make it faster and more efficient.
+
+Among all algorithms, Stochastic Gradient Descent(SGD) is considered as a good choice. It does not require a huge memory and each of its step is *cheap*. However, SGD is fast to converge to its local neighborhood rather than the optimal solution.  [Stochastic Variance Reduced Gradient(a.k.a SVRG)](http://stat.rutgers.edu/home/tzhang/papers/nips13-svrg.pdf) is a recent research work and could be viewed as a modified version of SGD. This algorithm will converge faster to optimal value by reducing the variance.
+
+The proposed algorithm SVRG is simple and elegent so I try to implement it and compare with SGD. Actually, we can download an implementation of SVRG from [author website](http://riejohnson.com/svrg_download.html) but it is written in C++ and not easy to match with the paper. For this reason, I try to *translate* the algorithm from paper to program using [**Julia ver 0.3**](https://github.com/JuliaLang/julia).
+
+First of all, I create a training data of $$n$$ points:
+
+$$ w = [1; 2; 3; 4] $$
+
+$$ x = r + ra $$
+
+$$ y = w' * x $$
+
+where $$r \sim U(-50, 50) $$ and $$ ra \sim \mathcal{N}(0, 1) $$. This task is implemented in file **genData.jl**.
+
+Secondly, I will minimize the squared loss of training data to get back vector $$w$$
+
+$$ P = \frac{1}{n} \sum_{i=1}^n \phi_i(w)$$ where $$\phi_i = (w' * x_i - y_i)^2$$
+
+Finally, $$w_{opt} = argmin_w P $$. The algorithm is in **svrg.jl**.
+
+In my running, $$n$$ is selected to be 100 000, update frequency $$m = 2n$$, learning rate is 0.0001. To run the code, we could type to terminal
+
+```julia
+julia main.jl
+```
+
+The output will appear
+
+```
+17373.341317718146
+2845.1973361489718
+3087.7982712672765
+1459.1467179096912
+102.26535395599187
+16.986501037489642
+3.284287345559172
+1.8046052335362346
+0.8103649634668636
+0.15111556209992194
+0.10221744358936354
+0.03395696393082646
+0.0030038768910633142
+0.000374384037301745
+1.9358523058164334e-5
+6.338155215045428e-6
+[0.9999890714244761,2.0000090291730728,3.00007147492654,3.99995174501473]
+```
+
+All the lines are value of objective function per each iteration and the last line is the final $$w$$. It is nearly similar to the groundtruth so my implementation is 95% correct :-).
+
+# Some thought of SVRG
+
+* The procedure is easy to understand and implement.
+* The proof is not so hard to follow but we need to be familiar with SGD first.
+* The learning rate of algorithm is still a parameter to tune. In the paper, authors advises us to chose learning rate $$\eta < \frac{1}{L} $$ with L is Lipschitz constant. An inappropriate $$\eta$$ could create divergence to our program. For example, applying learning rate $$\eta = 0.01$$ will make the objective function increase over time. This condition will help SVRG to converge but in practice, finding L is hard.
+* In *backtracking* SGD, the learning rate must be decreased over time to ensure the convergence. However, SVRG will keep the *suitable* value of learning rate until the convergence so it could achieve the better result by reducing the variance.
