@@ -12,7 +12,7 @@ Among all algorithms, Stochastic Gradient Descent(SGD) is considered as a good c
 
 The proposed algorithm SVRG is simple and elegent so I try to implement it and compare with SGD. Actually, we can download an implementation of SVRG from [author website](http://riejohnson.com/svrg_download.html) but it is written in C++ and not easy to match with the paper. For this reason, I try to *translate* the algorithm from paper to program using [**Julia ver 0.3**](https://github.com/JuliaLang/julia).
 
-First of all, I create a training data of $$n$$ points:
+First of all, I create a training data of *n* points:
 
 $$ w = [1; 2; 3; 4] $$
 
@@ -20,15 +20,19 @@ $$ x = r + ra $$
 
 $$ y = w' * x $$
 
-where $$r \sim U(-50, 50) $$ and $$ ra \sim \mathcal{N}(0, 1) $$. This task is implemented in file **genData.jl**.
+where $$r \sim U(-50, 50) $$ and $$ ra \sim \mathcal{N}(0, 1) $$. It means *r* is drawn from uniform distribution from -50 to 50. This task is implemented in file ```genData.jl```.
 
-Secondly, I will minimize the squared loss of training data to get back vector $$w$$
+Secondly, I will minimize the squared loss of training data to get back vector *w*. Formally, we have
 
-$$ P = \frac{1}{n} \sum_{i=1}^n \phi_i(w)$$ where $$\phi_i = (w' * x_i - y_i)^2$$
+$$ P = \frac{1}{n} \sum\_{i=1}^n \phi\_i(w) $$ 
 
-Finally, $$w_{opt} = argmin_w P $$. The algorithm is in **svrg.jl**.
+where 
 
-In my running, $$n$$ is selected to be 100 000, update frequency $$m = 2n$$, learning rate is 0.0001. To run the code, we could type to terminal
+$$ \phi\_i = (w^T * x\_i - y\_i)^2 $$
+
+Finally, $$ w\_{opt} = argmin\_w P $$. The algorithm is in ```svrg.jl```.
+
+In my running, *n* is selected to be 100 000, update frequency $$m = 2n$$, learning rate is 0.0001. To run the code, we could type to terminal
 
 ```julia
 julia main.jl
