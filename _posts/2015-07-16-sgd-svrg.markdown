@@ -10,7 +10,7 @@ Optimization has a long history but it is still developed by many researchers ar
 
 Among all algorithms, Stochastic Gradient Descent(SGD) is considered as a good choice. It does not require a huge memory and each of its step is *cheap*. However, SGD is fast to converge to its local neighborhood rather than the optimal solution.  [Stochastic Variance Reduced Gradient(a.k.a SVRG)](http://stat.rutgers.edu/home/tzhang/papers/nips13-svrg.pdf) is a recent research work and could be viewed as a modified version of SGD. This algorithm will converge faster to optimal value by reducing the variance.
 
-The proposed algorithm SVRG is simple and elegent so I try to implement it and compare with SGD. Actually, we can download an implementation of SVRG from [author website](http://riejohnson.com/svrg_download.html) but it is written in C++ and not easy to match with the paper. For this reason, I try to *translate* the algorithm from paper to program using [**Julia ver 0.3**](https://github.com/JuliaLang/julia).
+The proposed algorithm SVRG is simple and elegent so I try to implement it and compare with SGD. Actually, we can download an implementation of SVRG from [author website](http://riejohnson.com/svrg_download.html) but it is written in C++ and not easy to match with the paper. For this reason, I try to *translate* the algorithm from paper to program using [**Julia ver 0.3**](https://github.com/JuliaLang/julia). All of my implementation could be found in this [link](https://github.com/tndoan/Learning_Stuff/tree/master/StoGradDes).
 
 First of all, I create a training data of *n* points:
 
