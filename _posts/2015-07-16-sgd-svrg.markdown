@@ -60,11 +60,11 @@ The output will appear
 [0.9999890714244761,2.0000090291730728,3.00007147492654,3.99995174501473]
 ```
 
-All the lines are value of objective function per each iteration and the last line is the final $$w$$. It is nearly similar to the groundtruth so my implementation is 95% correct :-).
+All the lines are value of objective function per each iteration and the last line is the final \\(w\\). It is nearly similar to the groundtruth so my implementation is 95% correct :-).
 
 # Some thought of SVRG
 
 * The procedure is easy to understand and implement.
 * The proof is not so hard to follow but we need to be familiar with SGD first.
-* The learning rate of algorithm is still a parameter to tune. In the paper, authors advises us to chose learning rate $$\eta < \frac{1}{L} $$ with L is Lipschitz constant. An inappropriate $$\eta$$ could create divergence to our program. For example, applying learning rate $$\eta = 0.01$$ will make the objective function increase over time. This condition will help SVRG to converge but in practice, finding L is hard.
+* The learning rate of algorithm is still a parameter to tune. In the paper, authors advises us to chose learning rate \\(\eta < \frac{1}{L}\\) with L is Lipschitz constant. An inappropriate \\(\eta\\) could create divergence to our program. For example, applying learning rate \\(\eta = 0.01\\) will make the objective function increase over time. This condition will help SVRG to converge but in practice, finding L is hard.
 * In *backtracking* SGD, the learning rate must be decreased over time to ensure the convergence. However, SVRG will keep the *suitable* value of learning rate until the convergence so it could achieve the better result by reducing the variance.
