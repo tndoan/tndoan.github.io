@@ -1,0 +1,98 @@
+---
+layout: post
+mathjax: true
+title:  "Periodic Mobility Model"
+excerpt: "I try to derive the inference of PMM"
+comments: true
+date:   2015-08-06 22:30:00
+---
+
+$$
+\begin{align}
+p(c\_i = k, l\_i, t\_i \| \theta) &= p(l\_i \| c\_i = k, t\_i) \; p(t\_i, c\_i = k) \\\\
+&= p(l\_i \| c\_i = k) \; p(c\_i = k \| t\_i ) \; p(t\_i)
+\end{align}
+$$
+
+$$
+\begin{align}
+p(c\_i = k, l\_i, t\_i \| \theta) &= p(l\_i \| c\_i = k, t\_i) \; p(t\_i, c\_i = k) \\\\
+&= p(l\_i \| c\_i = k) \; p(t\_i \| c\_i = k) \; p(c\_i = k)
+\end{align}
+$$
+
+where
+
+$$
+\begin{align}
+p(l\_i \| c\_i = k) &\sim \mathbb{N}(\mu\_k, \Sigma\_k) \\\\
+p(t\_i \| c\_i = k) &=\frac{1}{\sqrt{2\pi \sigma^2\_k}} \exp ( - \(\frac{\pi}{12}\)^2 \frac{(t\_i - \tau\_k)^2}{2\sigma^2\_k} ) \\\\
+p(c\_i = k) &= P\_{c\_k}
+\end{align}
+$$
+
+$$
+\begin{align}
+p(c\_i = k \| l\_i\; t\_i) &= \frac{ p(l\_i \; t\_i \| c\_i = k) \; p(c\_i = k)}{\sum\_{k' = 1}^K p(l\_i \; t\_i; \; c\_i= k')} \\\\
+&= \frac{ p(l\_i \| c\_i = k) \; p(t\_i \| c\_i = k) \; p(c\_i = k)}{\sum\_{k'=1}^K p(l\_i \| c\_i = k') \; p(t\_i \| c\_i = k') \; p(c\_i = k')} \\\\
+&= \gamma\_{ik}
+\end{align}
+$$
+
+$$
+\begin{align}
+\log p(l\_i, \; t\_i, \; c\_i = k) &= \log p(l\_i \| c\_i = k) + \log p(t\_i \| c\_i = k) + \log P\_{c\_k} \\\\
+&= -\frac{1}{2} \log \| \Sigma\_k\| -\frac{1}{2} (l\_i - \mu\_k)^T \Sigma\_k^{-1} (l\_i - \mu\_k) - \log \sigma\_k - (\frac{\pi}{12})^2 \frac{(t\_i - \tau\_k)^2}{2 \sigma^2\_k} + \log P\_{c\_k} + const
+\end{align}
+$$
+
+$$
+\begin{align}
+Q(\theta, \; \theta^{old}) &= \mathbb{E}\_{C \| X, \theta^{old}} [ L (\theta; X, C)] \\\\
+&= \sum\_{i=1}^N \sum\_{k=1}^K p(c\_i = k \| x\_i, \theta^{old}) \; \log p(x\_i, \; c\_i = k \| \theta) \\\\
+&= \sum\_{i=1}^N \sum\_{k=1}^K \gamma\_{ik} [ -\frac{1}{2} \log \| \Sigma\_k\| -\frac{1}{2} (l\_i - \mu\_k)^T \Sigma\_k^{-1} (l\_i - \mu\_k) - \log \sigma\_k - (\frac{\pi}{12})^2 \frac{(t\_i - \tau\_k)^2}{2 \sigma^2\_k} + \log P\_{c\_k}]
+\end{align}
+$$
+
+We have one constraint that $$ \sum\_{k=1}^K P\_{c\_k} = 1$$ so apply Lagrange multiplier we have 
+$$Q(\theta, \; \theta^{old})= \sum\_{i=1}^N \sum\_{k=1}^K \gamma\_{ik} [ -\frac{1}{2} \log \| \Sigma\_k\| -\frac{1}{2} (l\_i - \mu\_k)^T \Sigma\_k^{-1} (l\_i - \mu\_k) - \log \sigma\_k - (\frac{\pi}{12})^2 \frac{(t\_i - \tau\_k)^2}{2 \sigma^2\_k} + \log P\_{c\_k}] + \lambda ( \sum\_{k=1}^K P\_{c\_k} - 1) $$
+
+$$
+\begin{align}
+\frac{\partial Q}{\partial P\_{c\_k}} &= \sum\_{i=1}^N \gamma\_{ik} \frac{1}{P\_{c\_k}} + \lambda = 0 \\\\
+\lambda \; P\_{c\_k} &=- \sum\_{i=1}^N\gamma\_{ik} \\\\
+\lambda &= - \sum\_{i=1}^N \sum\_{k=1}^K \gamma\_{ik} \\\\
+P\_{c\_k} &= \frac{\sum\_{i=1}^N\gamma\_{ik}}{\sum\_{i=1}^N \sum\_{k=1}^K \gamma\_{ik} }
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial Q}{\partial \tau\_k} &= \sum\_{i=1}^N \gamma\_{ik}[( \frac{\pi}{12})^2 2 \frac{t\_i - \tau\_k}{2 \sigma^2\_k} ] = 0 \\\\
+\sum\_{i=1}^N \gamma\_{ik} \; t\_i &= \sum\_{i=1}^N \gamma\_{ik} \tau\_k \\\\
+\tau\_k &= \frac{\sum\_{i=1}^N \gamma\_{ik} \; t\_i}{ \sum\_{i=1}^N \gamma\_{ik}}  \\\\
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial Q}{\partial \sigma\_k} &= \sum\_{i=1}^N \gamma\_{ik}[-\frac{1}{\sigma\_k} +  \frac{\pi^2 \; (t\_i - \tau\_k)^2}{12^2\; \sigma^3\_k} ] = 0 \\\\
+\sigma\_k^2 &= (\frac{\pi}{12})^2 \frac{ \sum\_{i=1}^N \gamma\_{ik} (t\_i - \tau\_k)^2 }{ \sum\_{i=1}^N \gamma\_{ik}  }
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial Q}{\partial \mu\_k} &= \sum\_{i=1}^N \gamma\_{ik}[ \Sigma\_k^{-1} (l\_i - \mu\_k)] = 0 \\\\
+\mu\_k &= (\sum\_{i=1}^N \gamma\_{ik})^{-1} \; \sum\_{i=1}^N \gamma\_{ik} \; l\_i
+\end{align}
+$$
+
+$$
+\begin{align}
+\frac{\partial Q}{\partial \Sigma\_k} &= \sum\_{i=1}^N \frac{\gamma\_{ik}}{2} [ -\Sigma\_k^{-1} + \Sigma\_k^{-1} (l\_i - \mu\_k)(l\_i - \mu\_k)^T   \Sigma\_k^{-1}] = 0 \\\\
+ \Sigma\_k &=\frac{\sum\_{i=1}^N \gamma\_{ik} (l\_i - \mu\_k) \; (l\_i - \mu\_k)^T }{ \sum\_{i=1}^N \gamma\_{ik}} \\\\
+\end{align}
+$$
+
+
