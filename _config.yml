@@ -6,5 +6,5 @@ url: "http://tndoan.github.io"
 github_username: tndoan
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 permalink: pretty
