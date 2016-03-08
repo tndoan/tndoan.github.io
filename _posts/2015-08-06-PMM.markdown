@@ -7,7 +7,7 @@ comments: true
 date:   2015-08-06 22:30:00
 ---
 
-# Disclamer
+## Disclamer
 **This post is giant wall of text and formula. I am not sure it is 100% correct so please read with your caution.**
 
 ["Friendship and Mobility: User movement in location-based social networks"](https://cs.stanford.edu/people/jure/pubs/mobile-kdd11.pdf) is an interesting paper which discusses about user movement. I think its intuition is quite clear and trivial but it is (maybe) the first paper which separates the location of users into two clusters named *Home* and *Work*. The data analysis of this paper is very nice. After all, the authors proposed a model name *Periodic Mobility Model* aka *PMM* to predict the *Home* and *Work* location of users. The whole process is follow
@@ -22,7 +22,7 @@ Before going to the formula, let me introduce the symbol system
 * \\(t\_i\\) is the time of check-in \\(i\\).
 * \\(x\_i\\) represents the check-in \\(i\\). Formally, it is a pair of location and time of check-in \\(x\_i = (l\_i, t\_i) \\).
 
-# The first attempt
+## The first attempt
 
 The joint distribution of each check-in will be calculated by
 
@@ -112,7 +112,7 @@ Setting them equal to 0 cannot give us a closed form solution because \\(N\_k(t\
 
 Optimizing Q with these constraints is the pain in the neck. Moreover, I could not find the closed form solution. It is quite weird because the authors claimed that they could derive the closed form solution.
 
-# Another look of model
+## Another look of model
 
 $$
 \begin{align}
