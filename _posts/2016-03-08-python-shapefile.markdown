@@ -131,7 +131,7 @@ plt.colorbar(im, cax=cax)                                  # set size of color b
 plt.show()
 ```
 
-The file ```user_density.txt``` could be downloaded via [this link](/assets/2016_03_08/user_density.txt'). The data inside this file is generated randomly. Each line of file contains 2 information latitude and longitude of each point and both are separated via comma. Function ```readLoc``` is used to load its data.
+The file ```user_density.txt``` could be downloaded via [this link](/assets/2016_03_08/user_density.txt). The data inside this file is generated randomly. Each line of file contains 2 information latitude and longitude of each point and both are separated via comma. Function ```readLoc``` is used to load its data.
 
 There are 2 important notes for the above code
 
