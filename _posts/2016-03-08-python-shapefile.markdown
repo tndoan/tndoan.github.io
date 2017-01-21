@@ -9,7 +9,7 @@ Last week, I needed to draw some maps and display data on these maps also. I hav
 
 ## Basic drawing
 
-1. First time first, we need to download the shapefile before doing anything. Luckily, [**Open street map**](https://osm.wno-edv-service.de/boundaries/) is an open source data for us to download the shapefile of boundary of many countries. However, do not forget to register an account to download. The data is quite complete and ready to use. I also put the [demo data of Singapore](/assets/Singapore_AL2.shp), and it is used to illustrate latter steps.
+1. First time first, we need to download the shapefile before doing anything. Luckily, [**Open street map**](https://www.openstreetmap.org) is an open source data for us to download the shapefile of boundary of many countries. However, there are [some services](http://www.gadm.org/country) extracted the shapefile of each countries for us. The data is quite complete and ready to use. I also put the demo data of Singapore [link1](/assets/2016_03_08/SGP_adm0.shp) [link2](/assets/2016_03_08/SGP_adm0.dbf) [link3](/assets/2016_03_08/SGP_adm0.shx), and they are used to illustrate latter steps (please download the whole three).
 2. Secondly, we need to choose the library to draw. [BaseMap](http://matplotlib.org/basemap/) is a common lib for drawing shapefile but it is overkilled in my situation i.e. I do not need to use its fancy features. Thus, [pyshp](https://pypi.python.org/pypi/pyshp) is my selection. It is lightweight but still powerful enough to satisfy my requirement. Moreover, installation and usage are as easy as ABC :-) . Last but not least, I have used Python 2.7 and matplotlib 1.4.2 to draw but the conversion to Python 3.x is not hard.
 3. Let us draw :-D
 
@@ -19,7 +19,7 @@ import shapefile as shp
 import matplotlib.pyplot as plt
 
 #load shapefile
-sf = shp.Reader('Singapore_AL2.shp')
+sf = shp.Reader('SGP_adm0.shp')
 
 plt.figure()
 for shape in sf.shapeRecords():
@@ -78,7 +78,7 @@ def readLoc(fname):
     return x, y
 
 #load shapefile
-sf = shp.Reader('Singapore_AL2.shp')
+sf = shp.Reader('SGP_adm0.shp')
 
 plt.figure()
 for shape in sf.shapeRecords():
