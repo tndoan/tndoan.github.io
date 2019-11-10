@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: "Learning neural network from real courses"
+excerpt: "Some neural network courses for self-study from big universities"
 date: 2019-11-09
 ---
 
