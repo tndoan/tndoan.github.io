@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Thanh-Nam Doan, Ph.D.
+title: About
 permalink: /about/
 ---
 
-My name is Thanh-Nam Doan. I usually go by Nam.
+My name is Thanh-Nam Doan, Ph.D. I usually go by Nam.
 
 I am a full time babysitter and part-time data scientist.
 
@@ -14,7 +14,10 @@ Outside working hours, I mostly spend time with my family. If I have some free t
 
 This blog is mostly about my thought and it only reflects my own viewpoint on open source, Julialang, Machine Learning, Big data analysis, and whatever makes me excited.
 
-If you want to contact me, email me at  [me [at] tndoan.com](http://tndoan.com/) where **[at]** is a very famous symbol and no spaces :) 
+If you want to contact me, email me at  
+
+[me [at] tndoan.com](http://tndoan.com/) 
+
 
 #### More about me
 
