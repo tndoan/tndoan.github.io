@@ -1,0 +1,79 @@
+---
+layout: post
+title: "Contour visualization with Plots.jl"
+date: 2022-02-22
+---
+
+I found that the official tutorial of [contours plot](https://docs.juliaplots.org/latest/generated/gr/#gr-ref22) on Plots.jl website is not enough for us to generate good visualization. So below is my attempt to have a nice plot.
+
+## Prerequisite
+
+- Julia 1.7.1
+- Plots.jl 1.25.7
+- Backend: GR
+
+
+We use [Himmelblau's function](https://en.wikipedia.org/wiki/Himmelblau%27s_function) to illustrate our visualization. The function is straightforward to define in Julia:
+
+```julia
+using Plots
+f(x, y) = (x^2 + y - 11)^2 + (x + y^2 -7)^2
+```
+
+```julia
+range_x = -6:0.1:6
+range_y = -6:0.1:6
+```
+
+## The first attempt
+
+```julia
+contour(range_x, range_y, f, xlabel="x", ylabel="y")
+```
+
+The code snippet above means that we need to draw the contour of function `f` with range of its parameter `x` and `y` defined by `range_x` and `range_y` respectively. Here is the result
+
+<img src="/assets/2022-02-22-contour/contour_1.png">
+
+The result is quite terrible since it does not allow us to recognize local minima. Can we do better?
+
+## The second attempt
+
+The answer is yes since `contour` provides several parameters and we try to explore in order to make better plot.
+
+The most important parameter we will explore is `levels`
+
+```julia
+contour(range_x, range_y, f, xlabel="x", ylabel="y", levels=200)
+```
+
+Basically, it will plot 200 contour lines in this visualization and here is the output
+
+<img src="/assets/2022-02-22-contour/contour_2.png">
+
+The figure above is a little bit better than the one of the first attempt. From the figure, we can somehow recognize that there are 4 local minima. However, since the number of contour lines is too large, the gap between 2 consecutive contour lines near the edge of figure is so small. Sequentially, it makes some illusion that there are more than 4 local minima. Hmm, it is not clear enough for us.
+
+## The third attempt
+
+In this attempt, we try to make the number of contour lines small enough for clear visualization but at the same time, the lines must be representative enough. How can we achieve these two goals at the same time? We observe that Himmelblau's function is always positive since it is the sum of two squares. Hence, we want to have contour lines when function has values 0. We also choose some other values to put contour lines. Now, we have a list of values of function that we want to draw contour lines and the list can be set by `levels` parameter.
+
+```julia
+contour(range_x, range_y, f, xlabel="x", ylabel="y",levels=[0,1,2,5,7,15,30,60, 120, 250, 500])
+```
+
+<img src="/assets/2022-02-22-contour/contour_3.png">
+
+Now, the figure is awesome, we now can see clearly the 4 local minima.
+
+## The final attempt
+
+Black and white figure is boring. We want to have some color to make it more exciting.
+
+```julia
+contour(range_x, range_y, f, xlabel="x", ylabel="y",levels=[0,1,2,5,7,15,30,60, 120, 250, 500], fill=true)
+```
+
+
+<img src="/assets/2022-02-22-contour/contour_4.png">
+
+Finally, the contour plot is 90% on par with the one on Wikipedia page.
