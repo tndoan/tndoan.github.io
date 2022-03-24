@@ -77,3 +77,10 @@ contour(range_x, range_y, f, xlabel="x", ylabel="y",levels=[0,1,2,5,7,15,30,60, 
 <img src="/assets/2022-02-22-contour/contour_4.png">
 
 Finally, the contour plot is 90% on par with the one on Wikipedia page.
+
+## Closing thoughts
+
+For me, to have good contour plot, there are two points we need to consider
+
+- First, we need to find the good value range of variable. Specifically, within this range, the function should have local maxima and minima.
+- Second, we should somehow predict the min/max value of function so that we can put these values for parameter `levels`
