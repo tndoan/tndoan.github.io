@@ -8,7 +8,7 @@ My name is Thanh-Nam Doan, Ph.D. I usually go by Nam.
 
 I am a full time babysitter and part-time data scientist.
 
-My current position is data scientist at [Trilliant Health](https://www.trillianthealth.com/) where I spend most of my day time working with healthcare data. The goal of our team is to use data-driven methods to *fix* healthcare system. My job includes cleaning data, building data pipeline, writing machine learning algorithms, evaluating predictive results and collaborating with product teams as well as domain experts to ensure the correctness of my work.
+My current position is full stack data scientist at [Factor Hardware](https://www.factor.io/) where I spend most of my day time working with supply chain data. The goal of our team is to use data-driven methods to *fix* supply chain disruptions. My job includes cleaning data, building data pipeline, writing machine learning algorithms, evaluating predictive results and collaborating with product teams as well as domain experts to ensure the correctness of my work.
 
 Outside working hours, I mostly spend time with my family. If I have some free time, I enjoy doing research with some students/collaborators on projects related to graph neural networks. 
 
